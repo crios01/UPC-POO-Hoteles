@@ -1,0 +1,4 @@
+jpalacios@gmail.com,juan001,El Carmen,juanpalacios,1
+amatos@yahoo.com,angel002,Mercantil,angelmatos,1
+mfernandez@hotmail.com,miguel003,El Remanso,miguelfernandez,1
+crobles@gmail.com,cesar004,California,cesarrobles,1
