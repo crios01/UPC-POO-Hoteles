@@ -28,7 +28,6 @@ public class AdmCuentaTest {
   @Test
   public void siPasoUnCorreoErradoMeDebeDarError() {
     assertFalse(admCuentas.verificaCorreo("jaime@mail.com."));
-    System.out.println("El correo esta errado.");
   }
 
   @Test
@@ -39,7 +38,6 @@ public class AdmCuentaTest {
   @Test
   public void siComparoDosCadenasClavesDiferentesMeDebeDarError() {
     assertFalse(admCuentas.comparaClaves("master001", "Master001"));
-    System.out.println("Las Claves no concuerdan.");
   }
 
   @Test
@@ -59,7 +57,6 @@ public class AdmCuentaTest {
   @Test
   public void siNoPasoElCheckMeDebeDarError() {
     assertFalse(admCuentas.verificaCheck('0'));
-    System.out.println("Debe Aceptar los Términos y Condiciones");
   }
 
   @Test
