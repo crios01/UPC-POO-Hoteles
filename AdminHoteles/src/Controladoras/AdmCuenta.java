@@ -2,13 +2,11 @@ package Controladoras;
 
 import Modelos.Cuenta;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class admCuenta {
+public class AdmCuenta {
 
   private ArrayList<Cuenta> dbCuentas = new ArrayList<Cuenta>();
   private File miDir = new File(".");
@@ -53,10 +51,11 @@ public class admCuenta {
     }
   }
 
-  public boolean verificaCadena(String cadena) {
+  public boolean verificaCadena(String cadena, String tipo) {
     if (cadena != null) {
       return true;
     }
+    System.out.println("Debe ingresar el campo " + tipo + ".");
     return false;
   }
 
@@ -66,9 +65,9 @@ public class admCuenta {
     pat = Pattern.compile("^([0-9a-zA-Z]([_.w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{2,9}.)+[a-zA-Z]{2,3})$");
     mat = pat.matcher(correo);
     if (mat.find()) {
-      System.out.println("[" + mat.group() + "]");
       return true;
     }
+    System.out.println("Debe ingresar un Correo Electrónico valido.");
     return false;
   }
 
@@ -79,6 +78,12 @@ public class admCuenta {
     return false;
   }
 
+  public String generaDirClerk(String nomHotel) {
+    nomHotel = "http://" + nomHotel.replaceAll(" ", "") + ".clerk.com";
+    String nombre = nomHotel.toLowerCase().trim().toString();
+    return nombre;
+  }
+
   public boolean verificaCheck(char check) {
     if (check == '1') {
       return true;
@@ -86,25 +91,31 @@ public class admCuenta {
     return false;
   }
 
-  public Cuenta buscaCuenta(String correo) {
+  public boolean buscaCuenta(String correo) {
     leerTabla();
-    Cuenta cuentaEncontrada = null;
     for (Cuenta cuenta : dbCuentas) {
       if (cuenta.getCorreo().equals(correo)) {
-        cuentaEncontrada = cuenta;
+        return false;
       }
     }
-    return cuentaEncontrada;
+    return true;
   }
 
-  public boolean registraCuenta(Cuenta cuenta) {
+  public boolean escribirCuenta(Cuenta cuenta) {
+    if (!buscaCuenta(cuenta.getCorreo())) {
+      System.out.println("Cuenta de Correo ya existe. Verifique ... !!!");
+      return false;
+    }
     FileWriter fw = null;
     PrintWriter pw = null;
+    boolean log = false;
     try {
-      fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Archivo.txt"));
+      fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Archivo.txt"), true);
       pw = new PrintWriter(fw);
-      pw.println(cuenta.getCorreo().trim() + "," + cuenta.getClave().trim() + "," + 
-                  cuenta.getNomHotel().trim() + "," + cuenta.getDirClerk().trim() + "," + cuenta.getCheck().trim());
+      pw.print(cuenta.getCorreo().trim() + "," + cuenta.getClave().trim() + ","
+              + cuenta.getNomHotel().trim() + "," + cuenta.getDirClerk().trim() + "," + cuenta.getCheck().trim() + "\n");
+      log = true;
+      System.out.println("Cuenta Registrada correctamente.");
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
@@ -116,16 +127,7 @@ public class admCuenta {
         e2.printStackTrace();
       }
     }
-    return false;
+    return log;
   }
 
-//  public boolean verificaFecha(String fechax) {
-//    try {
-//      SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-//      Date fecha = formatoFecha.parse(fechax);
-//    } catch (Exception e) {
-//      return false;
-//    }
-//    return true;
-//  }
 }
