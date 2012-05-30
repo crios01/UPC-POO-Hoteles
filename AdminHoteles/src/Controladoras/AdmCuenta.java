@@ -1,6 +1,7 @@
 package Controladoras;
 
 import Modelos.Cuenta;
+import Modelos.Hotel;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -14,9 +15,8 @@ public class AdmCuenta {
   public void leerTabla() {
     FileReader fr = null;
     BufferedReader br = null;
-
     try {
-      fr = new FileReader(new File(miDir.getCanonicalPath() + "/Archivo.txt"));
+      fr = new FileReader(new File(miDir.getCanonicalPath() + "/Cuentas.txt"));
       br = new BufferedReader(fr);
       String linea, cadena1, cadena2, cadena3, cadena4, cadena5;
       int ini = 0, fin = 0;
@@ -80,7 +80,7 @@ public class AdmCuenta {
   }
 
   public String generaDirClerk(String nomHotel) {
-    nomHotel = "http://" + nomHotel.replaceAll(" ", "") + ".clerk.com";
+    nomHotel = "http://" + nomHotel.replaceAll(" ", "") + ".clerk.im";
     String nombre = nomHotel.toLowerCase().trim().toString();
     return nombre;
   }
@@ -101,6 +101,38 @@ public class AdmCuenta {
       }
     }
     return true;
+  }
+
+  public ArrayList<Hotel> listaHoteles(String hotel) {
+    FileReader fr = null;
+    BufferedReader br = null;
+    ArrayList<Hotel> lista = new ArrayList<Hotel>();
+    String linea;
+    try {
+      fr = new FileReader(new File(miDir.getCanonicalPath() + "/Hoteles.txt"));
+      br = new BufferedReader(fr);
+      int cont = 0;
+      while ((linea = br.readLine()) != null) {
+        if (hotel.equals(linea.substring(0, hotel.length()))) {
+          lista.add(new Hotel(linea));
+          cont++;
+        }
+        if (cont == 5) {
+          break;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (null != fr) {
+          fr.close();
+        }
+      } catch (Exception e2) {
+        e2.printStackTrace();
+      }
+    }
+    return lista;
   }
 
   public boolean escribirCuenta(Cuenta cuenta) {

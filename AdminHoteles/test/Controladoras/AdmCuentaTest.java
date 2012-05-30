@@ -1,6 +1,8 @@
 package Controladoras;
 
 import Modelos.Cuenta;
+import Modelos.Hotel;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -47,13 +49,13 @@ public class AdmCuentaTest {
   }
 
   @Test
-  public void siPasoElNombreDelHotelMeDebeDarSuDireccionWeb(){
-    String cadenaGenerada = admCuentas.generaDirClerk("El Holandes Herrante");
-    String cadenaComparar = "http://elholandesherrante.clerk.com";
+  public void siPasoElNombreDelHotelMeDebeDarSuDireccionWeb() {
+    String cadenaGenerada = admCuentas.generaDirClerk("El Holandes Errante");
+    String cadenaComparar = "http://elholandeserrante.clerk.im";
     assertEquals(cadenaGenerada, cadenaComparar);
     System.out.println("La Dirección Web es:  " + cadenaGenerada);
   }
-  
+
   @Test
   public void siNoPasoElCheckMeDebeDarError() {
     assertFalse(admCuentas.verificaCheck('0'));
@@ -63,6 +65,19 @@ public class AdmCuentaTest {
   public void siPasoElCheckMeDebeDarVerdad() {
     assertTrue(admCuentas.verificaCheck('1'));
     System.out.println("Check correcto.");
+  }
+
+  @Test
+  public void siPasoUnaCadenaNombreHotelMeDebeRetornarUnaListaDeSugerencias() {
+    ArrayList<Hotel> lista = new ArrayList<Hotel>();
+    String nomRetornado = "", nomEsperado = "San Blas", nomAsignado = "San";
+    lista = admCuentas.listaHoteles(nomAsignado);
+    for (Hotel hotel : lista) {
+      nomRetornado = hotel.getNombre().trim();
+      System.out.println(hotel.getNombre());
+    }
+    // El esperado es el último de la lista.
+    assertEquals(nomEsperado, nomRetornado);
   }
 
   @Test

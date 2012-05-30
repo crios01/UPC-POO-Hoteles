@@ -1,0 +1,4 @@
+jpalacios@gmail.com,juan001,El Carmen,http://elcarmen.clerk.com,1
+amatos@yahoo.com,angel002,Mercantil,http://mercantil.clerk.com,1
+mfernandez@hotmail.com,miguel003,El Remanso,http://elremanso.clerk.com,1
+crobles@gmail.com,cesar004,California,http://california.clerk.com,1
