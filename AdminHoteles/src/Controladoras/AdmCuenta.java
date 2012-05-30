@@ -132,23 +132,23 @@ public class AdmCuenta {
     return log;
   }
 
-  public boolean registrarCuenta(String correo, String clave1, String clave2, String nomHotel, String dirClerk, char check){
-    if (!verificaCadena(correo, "Correo Electrónico") && !verificaCorreo(correo)){
+  public boolean registrarCuenta(String correo, String clave1, String clave2, String nomHotel, String dirClerk, char check) {
+    if (!verificaCadena(correo, "Correo Electrónico") && !verificaCorreo(correo)) {
       return false;
     }
     if (!verificaCadena(clave1, "Contraseña") && !verificaCadena(clave2, "Verifica Contraseña") && !comparaClaves(clave1, clave2)) {
       return false;
     }
-    if (!verificaCadena(nomHotel, "Nombre Hotel") && !verificaCheck(check)){
-      
+    if (!verificaCadena(nomHotel, "Nombre Hotel") && !verificaCheck(check)) {
+
       return false;
     }
-    if (!buscaCuenta(correo)){
+    if (!buscaCuenta(correo)) {
       System.out.println("Cuenta de Correo ya existe y se no puede registrar. Verifique ... !!!");
       return false;
     }
     Cuenta cuenta = new Cuenta(correo, clave1, nomHotel, dirClerk, String.valueOf(check));
-    if (escribirCuenta(cuenta)){
+    if (escribirCuenta(cuenta)) {
       System.out.println("Registro finalizado satisfactoriamente");
       System.out.println("Le llegara un correo a la dirección consignada y tiene");
       System.out.println("48 horas para realizar la confirmación. Adicionalmente");
