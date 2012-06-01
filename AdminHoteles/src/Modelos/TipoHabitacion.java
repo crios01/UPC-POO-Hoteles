@@ -10,12 +10,12 @@ public class TipoHabitacion {
   }
 
   // Getters
-  public String getDescripcion() {
+  public String getTipHabitacion() {
     return tipHabitacion;
   }
 
   // Setters
-  public void setDescripcion(String descripcion) {
-    this.tipHabitacion = descripcion;
+  public void setTipHabitacion(String tipHabitacion) {
+    this.tipHabitacion = tipHabitacion;
   }
 }
