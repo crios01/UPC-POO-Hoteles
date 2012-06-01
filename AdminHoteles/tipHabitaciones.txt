@@ -1,0 +1,6 @@
+Single
+Doble
+Suite
+Departament
+Cabin
+Meeting Room
