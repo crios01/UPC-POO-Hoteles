@@ -58,12 +58,12 @@ public class AdmCuentaTest {
 
   @Test
   public void siNoPasoElCheckMeDebeDarError() {
-    assertFalse(admCuentas.verificaCheck('0'));
+    assertFalse(admCuentas.verificaCheck(false));
   }
 
   @Test
   public void siPasoElCheckMeDebeDarVerdad() {
-    assertTrue(admCuentas.verificaCheck('1'));
+    assertTrue(admCuentas.verificaCheck(true));
     System.out.println("Check correcto.");
   }
 
@@ -94,12 +94,12 @@ public class AdmCuentaTest {
 
   @Test
   public void siRegistroUnaCuentaExistenteMeDebeDarError() {
-    assertFalse(admCuentas.escribirCuenta(new Cuenta("jpalacios@gmail.com", "juan002", "Sheraton", "juanpalacios", "1")));
+    assertFalse(admCuentas.escribirCuenta(new Cuenta("jpalacios@gmail.com", "juan002", "Sheraton", "juanpalacios", true)));
   }
 
   @Test
   public void siRegistroUnaCuentaNoExistenteMeDebeDarVerdad() {
     // Cada vez que se quiera correr el Test se debe cambiar de datos para que así sea un registro nuevo.
-    assertTrue(admCuentas.escribirCuenta(new Cuenta("pcabrera@hotmail.com", "ana001", "El Olivar", "http://elolivar.clerk.com", "1")));
+    assertTrue(admCuentas.escribirCuenta(new Cuenta("pcabrera@hotmail.com", "ana001", "El Olivar", "http://elolivar.clerk.com", true)));
   }
 }

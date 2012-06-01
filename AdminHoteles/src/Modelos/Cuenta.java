@@ -1,15 +1,20 @@
 package Modelos;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+
 public class Cuenta {
 
   private String correo;
   private String clave;
   private String nomHotel;
   private String dirClerk;
-  private String check;
+  private boolean check;
 
   // Contructor
-  public Cuenta(String correo, String clave, String nomHotel, String dirClerk, String check) {
+  public Cuenta(String correo, String clave, String nomHotel, String dirClerk, boolean check) {
     this.correo = correo;
     this.clave = clave;
     this.nomHotel = nomHotel;
@@ -34,7 +39,7 @@ public class Cuenta {
     this.dirClerk = dirClerk;
   }
 
-  public void setCheck(String check) {
+  public void setCheck(boolean check) {
     this.check = check;
   }
 
@@ -55,7 +60,7 @@ public class Cuenta {
     return nomHotel;
   }
 
-  public String getCheck() {
+  public boolean getCheck() {
     return check;
   }
 }

@@ -19,6 +19,7 @@ public class AdmCuenta {
       fr = new FileReader(new File(miDir.getCanonicalPath() + "/Cuentas.txt"));
       br = new BufferedReader(fr);
       String linea, cadena1, cadena2, cadena3, cadena4, cadena5;
+      boolean check5;
       int ini = 0, fin = 0;
       while ((linea = br.readLine()) != null) {
         ini = 0;
@@ -36,7 +37,8 @@ public class AdmCuenta {
         ini = fin + 1;
         fin = ini + 1;
         cadena5 = linea.substring(ini, fin);
-        this.dbCuentas.add(new Cuenta(cadena1, cadena2, cadena3, cadena4, cadena5));
+        check5 = linea.equals('1') ? true : false;
+        this.dbCuentas.add(new Cuenta(cadena1, cadena2, cadena3, cadena4, check5));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -85,8 +87,8 @@ public class AdmCuenta {
     return nombre;
   }
 
-  public boolean verificaCheck(char check) {
-    if (check == '1') {
+  public boolean verificaCheck(boolean check) {
+    if (check) {
       return true;
     }
     System.out.println("Debe aceptar los Términos y Condiciones.");
@@ -146,8 +148,9 @@ public class AdmCuenta {
     try {
       fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Archivo.txt"), true);
       pw = new PrintWriter(fw);
+      char acepta = cuenta.getCheck() ? '1' : '0' ;
       pw.print(cuenta.getCorreo().trim() + "," + cuenta.getClave().trim() + ","
-              + cuenta.getNomHotel().trim() + "," + cuenta.getDirClerk().trim() + "," + cuenta.getCheck().trim() + "\n");
+              + cuenta.getNomHotel().trim() + "," + cuenta.getDirClerk().trim() + "," + acepta + "\n");
       log = true;
       System.out.println("Cuenta Registrada correctamente.");
     } catch (Exception e) {
@@ -164,7 +167,7 @@ public class AdmCuenta {
     return log;
   }
 
-  public boolean registrarCuenta(String correo, String clave1, String clave2, String nomHotel, String dirClerk, char check) {
+  public boolean registrarCuenta(String correo, String clave1, String clave2, String nomHotel, String dirClerk, boolean check) {
     if (!verificaCadena(correo, "Correo Electrónico") && !verificaCorreo(correo)) {
       return false;
     }
@@ -179,7 +182,7 @@ public class AdmCuenta {
       System.out.println("Cuenta de Correo ya existe y se no puede registrar. Verifique ... !!!");
       return false;
     }
-    Cuenta cuenta = new Cuenta(correo, clave1, nomHotel, dirClerk, String.valueOf(check));
+    Cuenta cuenta = new Cuenta(correo, clave1, nomHotel, dirClerk, check);
     if (escribirCuenta(cuenta)) {
       System.out.println("Registro finalizado satisfactoriamente");
       System.out.println("Le llegara un correo a la dirección consignada y tiene");
