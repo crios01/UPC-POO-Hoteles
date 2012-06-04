@@ -67,17 +67,40 @@ public class AdmDefinicion {
     return lista;
   }
 
-  public boolean buscarHabitacion(String correo, String nombre){
+  public boolean buscarHabitacion(String correo, String nombre) {
     ArrayList<Habitacion> dbHabitacion = new ArrayList<Habitacion>();
     dbHabitacion = listaHabitaciones(correo);
-    for (Habitacion hab : dbHabitacion){
-      if (hab.getCorreo().equals(correo) && hab.getNombre().equals(nombre)){
+    for (Habitacion hab : dbHabitacion) {
+      if (hab.getCorreo().equals(correo) && hab.getNombre().equals(nombre)) {
         return false;
       }
     }
     return true;
   }
-  
+
+  public boolean escribirHabitacion(Habitacion hab) {
+    FileWriter fw = null;
+    PrintWriter pw = null;
+    boolean log = false;
+    try {
+      fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Habitaciones.txt"), true);
+      pw = new PrintWriter(fw);
+      pw.print(hab.getCorreo().trim() + "," + hab.getNombre().trim() + "," + hab.getTipHabitacion().trim());
+      log = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (null != fw) {
+          fw.close();
+        }
+      } catch (Exception e2) {
+        e2.printStackTrace();
+      }
+    }
+    return log;
+  }
+
   public ArrayList<TipoHabitacion> listaTipHabs() {
     ArrayList<TipoHabitacion> dbTipoHab = new ArrayList<TipoHabitacion>();
     FileReader fr = null;
