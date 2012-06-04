@@ -2,15 +2,15 @@ package Modelos;
 
 public class Hotel {
 
-  private String nombre;
+  private String nomHotel;
 
   // Constructor
-  public Hotel(String nombre) {
-    this.nombre = nombre;
+  public Hotel(String nomHotel) {
+    this.nomHotel = nomHotel;
   }
 
   // Getter
-  public String getNombre() {
-    return nombre;
+  public String getNomHotel() {
+    return nomHotel;
   }
 }

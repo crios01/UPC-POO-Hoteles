@@ -73,8 +73,8 @@ public class AdmCuentaTest {
     String nomRetornado = "", nomEsperado = "San Blas", nomAsignado = "San";
     lista = admCuentas.listaHoteles(nomAsignado);
     for (Hotel hotel : lista) {
-      nomRetornado = hotel.getNombre().trim();
-      System.out.println(hotel.getNombre());
+      nomRetornado = hotel.getNomHotel().trim();
+      System.out.println(hotel.getNomHotel());
     }
     // El esperado es el último de la lista.
     assertEquals(nomEsperado, nomRetornado);
