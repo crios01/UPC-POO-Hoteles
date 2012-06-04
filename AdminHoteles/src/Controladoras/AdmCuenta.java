@@ -95,17 +95,7 @@ public class AdmCuenta {
     return false;
   }
 
-  public boolean buscaCuenta(String correo) {
-    leerTabla();
-    for (Cuenta cuenta : dbCuentas) {
-      if (cuenta.getCorreo().equals(correo)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  public ArrayList<Hotel> listaHoteles(String hotel) {
+  public ArrayList<Hotel> listaHoteles(String hotel, int opcion) {  // 0-Todos, 1-Cinco coincidencias
     FileReader fr = null;
     BufferedReader br = null;
     ArrayList<Hotel> lista = new ArrayList<Hotel>();
@@ -115,11 +105,13 @@ public class AdmCuenta {
       br = new BufferedReader(fr);
       int cont = 0;
       while ((linea = br.readLine()) != null) {
-        if (hotel.equals(linea.substring(0, hotel.length()))) {
+        if (hotel.equals(linea.substring(0, hotel.length())) && opcion == 1) {
           lista.add(new Hotel(linea));
           cont++;
+        } else{
+          lista.add(new Hotel(linea));
         }
-        if (cont == 5) {
+        if (cont == 5 && opcion == 1) {
           break;
         }
       }
@@ -137,8 +129,18 @@ public class AdmCuenta {
     return lista;
   }
 
+  public boolean buscarCuenta(String correo) {
+    leerTabla();
+    for (Cuenta cuenta : dbCuentas) {
+      if (cuenta.getCorreo().equals(correo)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public boolean escribirCuenta(Cuenta cuenta) {
-    if (!buscaCuenta(cuenta.getCorreo())) {
+    if (!buscarCuenta(cuenta.getCorreo())) {
       System.out.println("Cuenta de Correo ya existe. Verifique ... !!!");
       return false;
     }
@@ -178,7 +180,7 @@ public class AdmCuenta {
 
       return false;
     }
-    if (!buscaCuenta(correo)) {
+    if (!buscarCuenta(correo)) {
       System.out.println("Cuenta de Correo ya existe y se no puede registrar. Verifique ... !!!");
       return false;
     }

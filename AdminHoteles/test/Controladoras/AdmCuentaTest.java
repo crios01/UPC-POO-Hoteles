@@ -71,7 +71,7 @@ public class AdmCuentaTest {
   public void siPasoUnaCadenaNombreHotelMeDebeRetornarUnaListaDeSugerencias() {
     ArrayList<Hotel> lista = new ArrayList<Hotel>();
     String nomRetornado = "", nomEsperado = "San Blas", nomAsignado = "San";
-    lista = admCuentas.listaHoteles(nomAsignado);
+    lista = admCuentas.listaHoteles(nomAsignado, 1);
     for (Hotel hotel : lista) {
       nomRetornado = hotel.getNomHotel().trim();
       System.out.println(hotel.getNomHotel());
@@ -82,13 +82,13 @@ public class AdmCuentaTest {
 
   @Test
   public void siPasoUnaCuentaExistenteMeDebeDarError() {
-    assertFalse(admCuentas.buscaCuenta("jpalacios@gmail.com"));
+    assertFalse(admCuentas.buscarCuenta("jpalacios@gmail.com"));
     System.out.println("Cuenta de correo ya existe.");
   }
 
   @Test
   public void siPasoUnaCuentaNoExistenteMeDebeDarVerdad() {
-    assertTrue(admCuentas.buscaCuenta("mcorrea@celtik.com.ar"));
+    assertTrue(admCuentas.buscarCuenta("mcorrea@celtik.com.ar"));
     System.out.println("Correcto, Cuenta no existe.");
   }
 
