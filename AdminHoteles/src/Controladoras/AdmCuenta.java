@@ -1,11 +1,9 @@
 package Controladoras;
 
-import Modelos.Cuenta;
-import Modelos.Hotel;
+import Modelos.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class AdmCuenta {
 
@@ -41,7 +39,7 @@ public class AdmCuenta {
         this.dbCuentas.add(new Cuenta(cadena1, cadena2, cadena3, cadena4, check5));
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
     } finally {
       try {
         if (null != fr) {
@@ -116,7 +114,7 @@ public class AdmCuenta {
         }
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
     } finally {
       try {
         if (null != fr) {
@@ -156,7 +154,7 @@ public class AdmCuenta {
       log = true;
       System.out.println("Cuenta Registrada correctamente.");
     } catch (Exception e) {
-      e.printStackTrace();
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
     } finally {
       try {
         if (null != fw) {

@@ -6,8 +6,8 @@ public class Habitacion extends TipoHabitacion {
   private String nombre;
 
   // Constructor
-  public Habitacion(String correo, String nombre, String tipHabitacion) {
-    super(tipHabitacion);
+  public Habitacion(String correo, String nombre, String tipHabitacion, double precio) {
+    super(tipHabitacion, precio);
     this.correo = correo;
     this.nombre = nombre;
   }
