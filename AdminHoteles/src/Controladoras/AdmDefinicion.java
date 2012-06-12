@@ -10,17 +10,17 @@ public class AdmDefinicion {
   
   public boolean verificaNumero(int numero) {
     if (numero <= 0) {
-      System.out.println("Debe ingresar un Número valido. Verifique !!!");
+      System.out.println("Debe ingresar un Cantidad valida. Verifique !!!");
       return false;
     }
     return true;
   }
   
-  public String verificaTiposHabitaciones(Habitacion habitacion) {
-    if (habitacion.getTipHabitacion().equals(null) || habitacion.getTipHabitacion().equals("")) {
-      habitacion.setTipHabitacion("Single");
+  public String verificaTiposHabitaciones(String tipoHabitacion) {
+    if (tipoHabitacion == null || tipoHabitacion.equals("")) {
+      tipoHabitacion = "Single";
     }
-    return habitacion.getTipHabitacion();
+    return tipoHabitacion;
   }
   
   public int recalculaNumHab(ArrayList habitaciones) {
