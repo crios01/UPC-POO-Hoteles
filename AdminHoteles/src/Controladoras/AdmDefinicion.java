@@ -5,9 +5,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class AdmDefinicion {
-  
+
   private File miDir = new File(".");
-  
+
   public boolean verificaNumero(int numero) {
     if (numero <= 0) {
       System.out.println("Debe ingresar un Cantidad valida. Verifique !!!");
@@ -15,14 +15,14 @@ public class AdmDefinicion {
     }
     return true;
   }
-  
+
   public String verificaTiposHabitaciones(String tipoHabitacion) {
     if (tipoHabitacion == null || tipoHabitacion.equals("")) {
       tipoHabitacion = "Single";
     }
     return tipoHabitacion;
   }
-  
+
   public int recalculaNumHab(ArrayList habitaciones) {
     return habitaciones.size();
   }
@@ -32,7 +32,9 @@ public class AdmDefinicion {
     ArrayList<Habitacion> lista = new ArrayList<Habitacion>();
     FileReader fr = null;
     BufferedReader br = null;
-    String linea, cadena1, cadena2, cadena3;
+    String linea, cadena1, cadena2, cadena3, cadena4, cadena5;
+    int item;
+    double precio;
     int ini = 0, fin = 0;
     try {
       fr = new FileReader(new File(miDir.getCanonicalPath() + "/Habitaciones.txt"));
@@ -41,14 +43,22 @@ public class AdmDefinicion {
         ini = 0;
         fin = linea.indexOf(",");
         cadena1 = linea.substring(ini, fin);
+        item = Integer.parseInt(cadena1);
         ini = fin + 1;
         fin = linea.indexOf(",", ini);
         cadena2 = linea.substring(ini, fin);
         ini = fin + 1;
-        fin = ini + 1;
+        fin = linea.indexOf(",", ini);
         cadena3 = linea.substring(ini, fin);
+        ini = fin + 1;
+        fin = linea.indexOf(",", ini);
+        cadena4 = linea.substring(ini, fin);
+        ini = fin + 1;
+        fin = ini + 1;
+        cadena5 = linea.substring(ini, fin);
+        precio = Double.parseDouble(cadena5);
         if (cadena1.equals(correo)) {
-          lista.add(new Habitacion(cadena1, cadena2, cadena3, 0));
+          lista.add(new Habitacion(item, cadena2, cadena3, cadena4, precio));
         }
       }
     } catch (Exception e) {
@@ -64,18 +74,18 @@ public class AdmDefinicion {
     }
     return lista;
   }
-  
-  public boolean buscarHabitacion(String correo, String nombre) {
+
+  public boolean buscarHabitacion(int item, String correo) {
     ArrayList<Habitacion> dbHabitacion = new ArrayList<Habitacion>();
     dbHabitacion = listaHabitaciones(correo);
     for (Habitacion hab : dbHabitacion) {
-      if (hab.getCorreo().equals(correo) && hab.getNombre().equals(nombre)) {
+      if (hab.getCorreo().equals(correo) && hab.getItem() == item) {
         return false;
       }
     }
     return true;
   }
-  
+
   public boolean escribirHabitacion(Habitacion hab) {
     FileWriter fw = null;
     PrintWriter pw = null;
@@ -83,7 +93,11 @@ public class AdmDefinicion {
     try {
       fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Habitaciones.txt"), true);
       pw = new PrintWriter(fw);
-      pw.print(hab.getCorreo().trim() + "," + hab.getNombre().trim() + "," + hab.getTipHabitacion().trim());
+      pw.print(String.valueOf(hab.getItem()).trim() + ","
+              + hab.getCorreo().trim() + ","
+              + hab.getNombre().trim() + ","
+              + hab.getTipHabitacion().trim() + ","
+              + String.valueOf(hab.getPrecio()).trim());
       log = true;
     } catch (Exception e) {
       e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
@@ -137,7 +151,7 @@ public class AdmDefinicion {
     }
     return precios;
   }
-  
+
   public double buscarPrecio(String correo, String tipHab) {
     ArrayList<Precio> dbPrecios = new ArrayList<Precio>();
     dbPrecios = listaPrecios(correo);
@@ -150,7 +164,7 @@ public class AdmDefinicion {
     }
     return precio;
   }
-  
+
   public boolean escribirPrecios(Precio precio) {
     FileWriter fw = null;
     PrintWriter pw = null;
@@ -158,7 +172,7 @@ public class AdmDefinicion {
     try {
       fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Precios.txt"), true);
       pw = new PrintWriter(fw);
-      
+
       //pw.print(pre.getCorreo() + "," + pre.getTipHabitacion() + "," + pre.getPrecio());
       log = true;
     } catch (Exception e) {
@@ -200,7 +214,7 @@ public class AdmDefinicion {
     }
     return dbTipoHab;
   }
-  
+
   public boolean buscarTipHab(String tipHab) {
     ArrayList<TipoHabitacion> dbTipoHab = new ArrayList<TipoHabitacion>();
     dbTipoHab = listaTipHabs();
@@ -211,7 +225,7 @@ public class AdmDefinicion {
     }
     return true;
   }
-  
+
   public boolean escribirTipHab(TipoHabitacion tipHab) {
     if (!buscarTipHab(tipHab.getTipHabitacion())) {
       System.out.println("Tipo de Habitación ya existe. Verifique !!!");
@@ -238,5 +252,32 @@ public class AdmDefinicion {
       }
     }
     return log;
+  }
+
+  public boolean borrarHabitacion(ArrayList<Habitacion> dbHabitacion, int item) {
+    boolean log = false;
+    try {
+      for (int i = 0; i < dbHabitacion.size(); i++) {
+        if (dbHabitacion.get(i).getItem() == item) {
+          dbHabitacion.remove(i);
+          log = true;
+          break;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+    }
+    return log;
+  }
+
+  public boolean agregarHabitacion(ArrayList<Habitacion> dbhabitacion, Habitacion habitacion) {
+    boolean log = false;
+    try {
+      dbhabitacion.add(habitacion);
+      log = true;
+    } catch (Exception e) {
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+    }
+    return true;
   }
 }
