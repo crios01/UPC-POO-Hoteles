@@ -23,11 +23,7 @@ public class AdmDefinicion {
     return tipoHabitacion;
   }
 
-  public int recalculaNumHab(ArrayList habitaciones) {
-    return habitaciones.size();
-  }
-
-  // Habitaciones
+  // Habitaciones (En base al archivo Habitaciones.txt)
   public ArrayList<Habitacion> listaHabitaciones(String correo) {
     ArrayList<Habitacion> lista = new ArrayList<Habitacion>();
     FileReader fr = null;
@@ -111,6 +107,43 @@ public class AdmDefinicion {
       }
     }
     return log;
+  }
+
+  // Habitaciones (En base a los datos en Pantalla)
+  public ArrayList<Habitacion> borrarHabitacion(ArrayList<Habitacion> dbHabitacion, int item) {
+    ArrayList<Habitacion> dbHab = null;
+    try {
+      for (int i = 0; i < dbHabitacion.size(); i++) {
+        if (dbHabitacion.get(i).getItem() == item) {
+          dbHabitacion.remove(i);
+          break;
+        }
+      }
+      dbHab = dbHabitacion;
+    } catch (Exception e) {
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+    }
+    return dbHab;
+  }
+
+  public ArrayList<Habitacion> insertarHabitacion(ArrayList<Habitacion> dbHabitacion, Habitacion habitacion) {
+    ArrayList<Habitacion> dbHab = null;
+    try {
+      dbHabitacion.add(habitacion);
+      dbHab = dbHabitacion;
+    } catch (Exception e) {
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+    }
+    return dbHab;
+  }
+
+  public ArrayList<Habitacion> modificarHabitacion(ArrayList<Habitacion> dbHabitacion, Habitacion habitacion) {
+    try {
+      dbHabitacion.set(dbHabitacion.indexOf(habitacion), habitacion);
+    } catch (Exception e) {
+      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+    }
+    return dbHabitacion;
   }
 
   // Precios
@@ -254,30 +287,12 @@ public class AdmDefinicion {
     return log;
   }
 
-  public boolean borrarHabitacion(ArrayList<Habitacion> dbHabitacion, int item) {
-    boolean log = false;
-    try {
-      for (int i = 0; i < dbHabitacion.size(); i++) {
-        if (dbHabitacion.get(i).getItem() == item) {
-          dbHabitacion.remove(i);
-          log = true;
-          break;
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
+  // Precios
+  public boolean verificarPrecio(double precio) {
+    if (precio > 0) {
+      return true;
     }
-    return log;
-  }
-
-  public boolean agregarHabitacion(ArrayList<Habitacion> dbhabitacion, Habitacion habitacion) {
-    boolean log = false;
-    try {
-      dbhabitacion.add(habitacion);
-      log = true;
-    } catch (Exception e) {
-      e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
-    }
-    return true;
+    System.out.println("Debe ingresar un Precio valido. Verifique !!!");
+    return false;
   }
 }
