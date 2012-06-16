@@ -85,8 +85,8 @@ public class AdmCuenta {
     return nombre;
   }
 
-  public boolean verificaCheck(boolean check) {
-    if (check) {
+  public boolean verificaCheck(String check) {
+    if (check.equals("S")) {
       return true;
     }
     System.out.println("Debe aceptar los Términos y Condiciones.");
@@ -103,10 +103,10 @@ public class AdmCuenta {
       br = new BufferedReader(fr);
       int cont = 0;
       while ((linea = br.readLine()) != null) {
-        if (hotel.equals(linea.substring(0, hotel.length())) && opcion == 1) {
+        if (hotel.equals(linea.substring(0, 2)) && opcion == 1) {
           lista.add(new Hotel(linea));
           cont++;
-        } else{
+        } else {
           lista.add(new Hotel(linea));
         }
         if (cont == 5 && opcion == 1) {
@@ -125,6 +125,16 @@ public class AdmCuenta {
       }
     }
     return lista;
+  }
+
+  public boolean buscaHotel(String nomHotel) {
+    ArrayList<Hotel> lista = listaHoteles("", 0);
+    for (Hotel hotel : lista) {
+      if (hotel.getNomHotel().trim().equals(nomHotel)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public boolean buscarCuenta(String correo) {
@@ -146,13 +156,12 @@ public class AdmCuenta {
     PrintWriter pw = null;
     boolean log = false;
     try {
-      fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Archivo.txt"), true);
+      fw = new FileWriter(new File(miDir.getCanonicalPath() + "/Cuentas.txt"), true);
       pw = new PrintWriter(fw);
-      char acepta = cuenta.getCheck() ? '1' : '0' ;
+      char acepta = cuenta.getCheck() ? '1' : '0';
       pw.print(cuenta.getCorreo().trim() + "," + cuenta.getClave().trim() + ","
               + cuenta.getNomHotel().trim() + "," + cuenta.getDirClerk().trim() + "," + acepta + "\n");
       log = true;
-      System.out.println("Cuenta Registrada correctamente.");
     } catch (Exception e) {
       e.printStackTrace(); // Escribe la misma línea del texto de error, además del número exacto de línea de código.
     } finally {
@@ -165,31 +174,5 @@ public class AdmCuenta {
       }
     }
     return log;
-  }
-
-  public boolean registrarCuenta(String correo, String clave1, String clave2, String nomHotel, String dirClerk, boolean check) {
-    if (!verificaCadena(correo, "Correo Electrónico") && !verificaCorreo(correo)) {
-      return false;
-    }
-    if (!verificaCadena(clave1, "Contraseña") && !verificaCadena(clave2, "Verifica Contraseña") && !comparaClaves(clave1, clave2)) {
-      return false;
-    }
-    if (!verificaCadena(nomHotel, "Nombre Hotel") && !verificaCheck(check)) {
-
-      return false;
-    }
-    if (!buscarCuenta(correo)) {
-      System.out.println("Cuenta de Correo ya existe y se no puede registrar. Verifique ... !!!");
-      return false;
-    }
-    Cuenta cuenta = new Cuenta(correo, clave1, nomHotel, dirClerk, check);
-    if (escribirCuenta(cuenta)) {
-      System.out.println("Registro finalizado satisfactoriamente");
-      System.out.println("Le llegara un correo a la dirección consignada y tiene");
-      System.out.println("48 horas para realizar la confirmación. Adicionalmente");
-      System.out.println("se le asigna un Plan gratuito hasta que cambie a un plan");
-      System.out.println("con costo.");
-    }
-    return false;
   }
 }

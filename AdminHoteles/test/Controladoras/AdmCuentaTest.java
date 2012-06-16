@@ -58,12 +58,12 @@ public class AdmCuentaTest {
 
   @Test
   public void siNoPasoElCheckMeDebeDarError() {
-    assertFalse(admCuentas.verificaCheck(false));
+    assertFalse(admCuentas.verificaCheck("0"));
   }
 
   @Test
   public void siPasoElCheckMeDebeDarVerdad() {
-    assertTrue(admCuentas.verificaCheck(true));
+    assertTrue(admCuentas.verificaCheck("1"));
     System.out.println("Check correcto.");
   }
 

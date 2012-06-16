@@ -2,6 +2,7 @@ package Modelos;
 
 public class Precio extends TipoHabitacion {
 
+  private int item;
   private String correo;
   private String moneda1;
   private double precio1;
@@ -11,8 +12,9 @@ public class Precio extends TipoHabitacion {
   private double precio3;
 
   // Contructor
-  public Precio(String correo, String tipHabitacion, String moneda1, double precio1, String moneda2, double precio2, String moneda3, double precio3) {
+  public Precio(int item, String correo, String tipHabitacion, String moneda1, double precio1, String moneda2, double precio2, String moneda3, double precio3) {
     super(tipHabitacion);
+    this.item = item;
     this.correo = correo;
     this.moneda1 = moneda1;
     this.precio1 = precio1;
@@ -23,6 +25,10 @@ public class Precio extends TipoHabitacion {
   }
 
   // Getters
+  public int getItem() {
+    return item;
+  }
+
   public String getCorreo() {
     return correo;
   }
@@ -49,5 +55,18 @@ public class Precio extends TipoHabitacion {
 
   public double getPrecio3() {
     return precio3;
+  }
+
+  //Setters
+  public void setPrecio1(double precio1) {
+    this.precio1 = precio1;
+  }
+
+  public void setPrecio2(double precio2) {
+    this.precio2 = precio2;
+  }
+
+  public void setPrecio3(double precio3) {
+    this.precio3 = precio3;
   }
 }

@@ -13,12 +13,14 @@ public class AdmDefinicionTest {
 
   @Test
   public void siPasoUnNumeroNoValidoMeDebeRetornarFalso() {
-    assertFalse(admDef.verificaNumero(0));
+    assertFalse(admDef.verificaNumero("0"));
+    assertFalse(admDef.verificaNumero("2.3"));
+    assertFalse(admDef.verificaNumero("X"));
   }
 
   @Test
   public void siPasoUnNumeroValidoMeDebeRetornarVerdad() {
-    assertTrue(admDef.verificaNumero(35));
+    assertTrue(admDef.verificaNumero("35"));
     System.out.println("Cantidad correcta ... !!!");
   }
 
@@ -30,7 +32,7 @@ public class AdmDefinicionTest {
 
   @Test
   public void siEliminoUnaHabitacionElNumeroSeRecalcula() {
-    datosPrueba datos = new datosPrueba();
+    DatosPrueba datos = new DatosPrueba();
     ArrayList<Habitacion> dbHabitacion = datos.llenarTablaHabitacion();
     int numeroActual = dbHabitacion.size();
     int numeroNuevo = admDef.borrarHabitacion(dbHabitacion, 20).size();
@@ -40,7 +42,7 @@ public class AdmDefinicionTest {
 
   @Test
   public void siAgregoUnHabitacionElNumeroSeRecalcula() {
-    datosPrueba datos = new datosPrueba();
+    DatosPrueba datos = new DatosPrueba();
     ArrayList<Habitacion> dbHabitacion = datos.llenarTablaHabitacion();
     Habitacion habitacion = new Habitacion(37, "mfernandez@hotmail.com", "137", "Single");
     int numeroActual = dbHabitacion.size();
@@ -51,7 +53,7 @@ public class AdmDefinicionTest {
 
   @Test
   public void siModificoUnaHabitacionMeDebeDarVerdad() {
-    datosPrueba datos = new datosPrueba();
+    DatosPrueba datos = new DatosPrueba();
     ArrayList<Habitacion> dbHabitacion = datos.llenarTablaHabitacion();
 //    Habitacion habActual = dbHabitacion.get(25);
     Habitacion habNueva = dbHabitacion.get(25);
@@ -69,7 +71,7 @@ public class AdmDefinicionTest {
 
   @Test
   public void siPasoUnPrecioNoValidoMeDebeRetornarFalso() {
-    Precio precio = new Precio("mfernandez@hotmail.com", "Single", "NS", 0.00, "US", 0.00, "EU", 0.00);
+    Precio precio = new Precio(1, "mfernandez@hotmail.com", "Single", "NS", 0.00, "US", 0.00, "EU", 0.00);
     assertFalse(admDef.verificarPrecio(precio.getPrecio1()));
     assertFalse(admDef.verificarPrecio(precio.getPrecio2()));
     assertFalse(admDef.verificarPrecio(precio.getPrecio3()));
@@ -77,7 +79,7 @@ public class AdmDefinicionTest {
 
   @Test
   public void siPasoUnPrecioValidoMeDebeRetornarVerdad() {
-    Precio precio = new Precio("mfernandez@hotmail.com", "Single", "NS", 100.00, "US", 200.00, "EU", 300.00);
+    Precio precio = new Precio(1, "mfernandez@hotmail.com", "Single", "NS", 100.00, "US", 200.00, "EU", 300.00);
     assertTrue(admDef.verificarPrecio(precio.getPrecio1()));
     assertTrue(admDef.verificarPrecio(precio.getPrecio2()));
     assertTrue(admDef.verificarPrecio(precio.getPrecio3()));

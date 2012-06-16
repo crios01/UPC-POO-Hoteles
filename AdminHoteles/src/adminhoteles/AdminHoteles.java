@@ -1,12 +1,17 @@
 package adminhoteles;
 
-import Controladoras.AdmDefinicion;
-import Controladoras.datosPrueba;
-import Modelos.Habitacion;
-import java.util.ArrayList;
+import Menus.*;
 
 public class AdminHoteles {
 
   public static void main(String[] args) {
+    MCuenta mCuenta = new MCuenta();
+    MDefinicion mDefinicion = new MDefinicion();
+    boolean opCuenta, opDefinicion;
+    opCuenta = mCuenta.menuCuenta();
+    if (opCuenta) {
+      mDefinicion.setnCorreo(mCuenta.getnCorreo());
+      opDefinicion = mDefinicion.menuDefinicion();
+    }
   }
-}
+} // System.out.println();

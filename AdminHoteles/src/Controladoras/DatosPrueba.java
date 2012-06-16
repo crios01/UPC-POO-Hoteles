@@ -3,7 +3,7 @@ package Controladoras;
 import Modelos.*;
 import java.util.ArrayList;
 
-public class datosPrueba {
+public class DatosPrueba {
 
   public ArrayList<Habitacion> llenarTablaHabitacion() {
     ArrayList<Habitacion> dbHabitacion = new ArrayList<Habitacion>();
@@ -48,12 +48,12 @@ public class datosPrueba {
 
   public ArrayList<Precio> llenarTablaPrecios() {
     ArrayList<Precio> dbPrecio = new ArrayList<Precio>();
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Single", "NS", 100.00, "US", 37.00, "EU", 25.00));
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Doble", "NS", 200.00, "US", 74.00, "EU", 50.00));
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Suite", "NS", 300.00, "US", 112.00, "EU", 75.00));
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Departament", "NS", 400.00, "US", 150.00, "EU", 100.00));
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Cabin", "NS", 500.00, "US", 185.00, "EU", 125.00));
-    dbPrecio.add(new Precio("mfernandez@hotmail.com", "Meeting Room", "NS", 600.00, "US", 225.00, "EU", 150.00));
+    dbPrecio.add(new Precio(1, "mfernandez@hotmail.com", "Single", "NS", 100.00, "US", 37.00, "EU", 25.00));
+    dbPrecio.add(new Precio(2, "mfernandez@hotmail.com", "Doble", "NS", 200.00, "US", 74.00, "EU", 50.00));
+    dbPrecio.add(new Precio(3, "mfernandez@hotmail.com", "Suite", "NS", 300.00, "US", 112.00, "EU", 75.00));
+    dbPrecio.add(new Precio(4, "mfernandez@hotmail.com", "Departament", "NS", 400.00, "US", 150.00, "EU", 100.00));
+    dbPrecio.add(new Precio(5, "mfernandez@hotmail.com", "Cabin", "NS", 500.00, "US", 185.00, "EU", 125.00));
+    dbPrecio.add(new Precio(6, "mfernandez@hotmail.com", "Meeting Room", "NS", 600.00, "US", 225.00, "EU", 150.00));
     return dbPrecio;
   }
 }
